@@ -1,6 +1,6 @@
-global _ft_strlen
 
 section .text
+	global _ft_strlen
 
 _ft_strlen:
 
@@ -12,7 +12,6 @@ loop:
 		je exit
 		inc rax
 		jmp loop
-
 
 exit:
 		ret
