@@ -7,6 +7,8 @@ SRCS	=	ft_strlen.s \
 
 MAIN	=	main.c \
 
+INC 	=	libasm.h \
+
 NAME	=	libasm.a
 
 M_NAME	=	test
@@ -17,17 +19,19 @@ OBJS	=	$(SRCS:.s=.o)
 
 all: $(NAME)
 
-$(NAME):	$(OBJS)
+$(NAME):	$(OBJS) $(INC)
 			ar rc $(NAME) $(OBJS)
 			ranlib $(NAME)
-			gcc -Wall -Wextra -Werror -I./libasm.h -o $(M_NAME) $(NAME) main.c
+
+test:	$(NAME) $(MAIN)
+		gcc -Wall -Wextra -Werror -o $(M_NAME) $(NAME) $(MAIN)
 
 clean:		
-			rm -f $(OBJS)
+			rm -f $(OBJS) main.o
 
 fclean:		clean
 			rm -f $(NAME) $(M_NAME)
 
 re:			fclean all
 
-.PHONY:		all re clean fclean
+.PHONY:		all re clean fclean test
